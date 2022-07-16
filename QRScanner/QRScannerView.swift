@@ -289,15 +289,12 @@ public class QRScannerView: UIView {
         var videoOrientation: AVCaptureVideoOrientation
         switch UIDevice.current.orientation {
         case .landscapeLeft:
-            videoOrientation = .landscapeRight
+            self.previewLayer?.connection?.videoOrientation = .landscapeLeft
         case .landscapeRight:
-            videoOrientation = .landscapeLeft
-        case .portraitUpsideDown:
-            videoOrientation = .portraitUpsideDown
+            self.previewLayer?.connection?.videoOrientation = .landscapeRight
         default:
-            videoOrientation = .portrait
+            break
         }
-        self.previewLayer?.connection?.videoOrientation = videoOrientation
     }
 
     private func removePreviewLayer() {
