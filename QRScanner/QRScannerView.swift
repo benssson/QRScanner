@@ -79,8 +79,6 @@ public class QRScannerView: UIView {
         addPreviewLayer()
         setupBlurEffectView()
         setupImageViews()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updatePreviewLayerForDeviceOrientation), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
 
     public func startRunning() {
@@ -281,22 +279,8 @@ public class QRScannerView: UIView {
         layer.addSublayer(previewLayer)
 
         self.previewLayer = previewLayer
-        
-        updatePreviewLayerForDeviceOrientation()
     }
-
-    @objc private func updatePreviewLayerForDeviceOrientation() {
-        var videoOrientation: AVCaptureVideoOrientation
-        switch UIDevice.current.orientation {
-        case .landscapeLeft:
-            self.previewLayer?.connection?.videoOrientation = .landscapeLeft
-        case .landscapeRight:
-            self.previewLayer?.connection?.videoOrientation = .landscapeRight
-        default:
-            break
-        }
-    }
-
+    
     private func removePreviewLayer() {
         previewLayer?.removeFromSuperlayer()
     }
